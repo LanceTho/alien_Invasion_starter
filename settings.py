@@ -1,7 +1,16 @@
+"""
+settings.py
+Lance Thongsavanh
+This file houses the settings for the game
+4/9/2026
+"""
+
 from pathlib import Path
 class Settings:
     
     def __init__(self) -> None:
+        """Holds all of the set variables for the game
+        """
         self.name: str = "Alien Invasion"
         self.screen_width = 1000
         self.screen_height = 600
