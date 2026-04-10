@@ -60,18 +60,26 @@ class Bullet(Sprite):
             self.shoot_left()
 
     def shoot_up(self):
+        """fires the bullet upwards
+        """
         self.y -= self.settings.bullet_speed
         self.rect.y = self.y
     
     def shoot_down(self):
+        """fires the bullet downwards
+        """
         self.y += self.settings.bullet_speed
         self.rect.y = self.y
 
     def shoot_right(self):
+        """fires the bullet to the right
+        """
         self.x += self.settings.bullet_speed
         self.rect.x = self.x
 
     def shoot_left(self):
+        """fires the bullet to the left
+        """
         self.x -= self.settings.bullet_speed
         self.rect.x = self.x
 
