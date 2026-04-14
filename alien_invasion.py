@@ -90,7 +90,6 @@ class AlienInvasion:
         """
         self.screen.blit(self.bg, (0,0))
         self.ship.draw()
-        #self.alien.draw_alien()
         self.alien_fleet.draw()
         pygame.display.flip()
 
@@ -101,8 +100,7 @@ class AlienInvasion:
         while self.running:
             self._check_events()
             self.ship.update()
-            #self.alien.update()
-            self.alien_fleet.draw()
+            self.alien_fleet.update_fleet()
             self._update_screen()
             self.clock.tick(self.settings.FPS)
 
