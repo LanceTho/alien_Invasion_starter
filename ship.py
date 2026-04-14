@@ -37,14 +37,12 @@ class Ship():
         self.image_right = pygame.transform.flip(self.image_left, True, False)
 
         self.rect = self.image.get_rect()
-        self.rect.midleft = self.boundaries.midleft
+        self.rect.midbottom = self.boundaries.midbottom
 
         self.moving_right = False
         self.moving_left = False
         self.moving_down = False
         self.moving_up = False
-        self.directions = ["right", "left", "up", "down"]
-        self.facing = self.directions[0]
         self.x = self.rect.x
         self.y = self.rect.y
         self.arsenal = arsenal
@@ -91,13 +89,9 @@ class Ship():
         """
         if self.moving_down:
             self.image = self.image_down
-            self.facing = self.directions[3]
         elif self.moving_up:
             self.image = self.image_up
-            self.facing = self.directions[2]
         elif self.moving_left:
             self.image = self.image_left
-            self.facing = self.directions[1]
         elif self.moving_right:
             self.image = self.image_right
-            self.facing = self.directions[0]
