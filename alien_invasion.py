@@ -2,7 +2,7 @@
 alien_invasion.py
 Lance Thongsavanh
 This is the main file for the game
-4/9/2026
+4/14/2026
 """
 
 import sys
@@ -113,6 +113,8 @@ class AlienInvasion:
             self.clock.tick(self.settings.FPS)
 
     def _check_collisions(self) -> None:
+        """checks if an alien hits the ship or the bottom of the screen or a laser
+        """
         # check collisions for ship
         if self.ship.check_collisions(self.alien_fleet.fleet):
             self._check_game_status()
@@ -132,6 +134,8 @@ class AlienInvasion:
             self._reset_level()
 
     def _check_game_status(self):
+        """checks the amount of ships left
+        """
         if self.game_stats.ships_left > 0:
             self.game_stats.ships_left -= 1
             self._reset_level()
@@ -140,6 +144,8 @@ class AlienInvasion:
             self.game_active = False
 
     def _reset_level(self) -> None:
+        """resets the entire level
+        """
         self.ship.arsenal.arsenal.empty()
         self.alien_fleet.fleet.empty()
         self.alien_fleet.create_fleet()

@@ -2,7 +2,7 @@
 alien.py
 Lance Thongsavanh
 This file has the Alien class
-4/9/2026
+4/14/2026
 """
 
 import pygame
@@ -42,7 +42,7 @@ class Alien(Sprite):
         self.y = self.rect.y
 
     def update(self) -> None:
-        """Moves the alein
+        """Moves the alien
         """
         temp_speed = self.settings.fleet_speed
         
@@ -51,6 +51,11 @@ class Alien(Sprite):
         self.rect.y = self.y
 
     def check_edges(self) -> bool:
+        """Checks if the alien hit the edge of the screen
+
+        Returns:
+            bool: returns true if it did, otherwise returns false
+        """
         return (self.rect.right >= self.boundaries.right or self.rect.left <= self.boundaries.left)
 
     def draw_alien(self) -> None:
