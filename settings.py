@@ -2,7 +2,7 @@
 settings.py
 Lance Thongsavanh
 This file houses the settings for the game
-4/14/2026
+4/21/2026
 """
 
 from pathlib import Path
@@ -42,6 +42,8 @@ class Settings:
         self.font_file = Path.cwd() / "Assets" / "Fonts" / "Silkscreen" / "Silkscreen-Bold.ttf"
 
     def initialize_dynamic_settings(self) -> None:
+        """Initializes settings that can be changed
+        """
         self.ship_speed = 5
         self.starting_ship_count = 3
         
@@ -55,6 +57,8 @@ class Settings:
         self.alien_points = 50
 
     def increase_difficulty(self) -> None:
+        """changes some settings based on the difficulty scale
+        """
         self.ship_speed *= self.difficulty_scale
         self.bullet_speed *= self.difficulty_scale
         self.fleet_speed *= self.difficulty_scale
