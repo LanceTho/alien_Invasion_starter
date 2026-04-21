@@ -15,6 +15,7 @@ from arsenal import Arsenal
 from alien_fleet import AlienFleet
 from time import sleep
 from button import Button
+from hud import HUD
 
 class AlienInvasion:
     """This is the class that creates the game
@@ -27,7 +28,6 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
         self.settings.initialize_dynamic_settings()
-        self.game_stats = GameStats(self)
         
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption(self.settings.name)
@@ -35,6 +35,8 @@ class AlienInvasion:
         self.bg = pygame.image.load(self.settings.bg_file)
         self.bg = pygame.transform.scale(self.bg, (self.settings.screen_width, self.settings.screen_height))
 
+        self.game_stats = GameStats(self)
+        self.HUD = HUD(self)
         self.running = True
         self.clock = pygame.time.Clock()
 
@@ -58,6 +60,7 @@ class AlienInvasion:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+                self.game_stats.save_scores()
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN and self.game_active == True:
@@ -80,6 +83,7 @@ class AlienInvasion:
         """
         if event.key == pygame.K_q:
             self.running = False
+            self.game_stats.save_scores()
             pygame.quit()
             sys.exit()
         elif event.key == pygame.K_LEFT:
@@ -108,7 +112,7 @@ class AlienInvasion:
         self.screen.blit(self.bg, (0,0))
         self.ship.draw()
         self.alien_fleet.draw()
-        # draw HUD
+        self.HUD.draw()
 
         if not self.game_active:
             self.play_button.draw()
@@ -147,6 +151,7 @@ class AlienInvasion:
             self.impact.play()
             self.impact.fadeout(500)
             self.game_stats.update(collisions)
+            self.HUD.update_scores()
 
         if self.alien_fleet.check_destroyed_status():
             self._reset_level()
@@ -174,9 +179,8 @@ class AlienInvasion:
 
     def restart_game(self) -> None:
         self.settings.initialize_dynamic_settings()
-        # reset Game stats
         self.game_stats.reset_stats()
-        # update HUD scores
+        self.HUD.update_scores()
         self._reset_level()
         self.ship._center_ship()
         self.game_active = True
